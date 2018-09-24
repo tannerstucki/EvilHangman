@@ -8,10 +8,10 @@ import hangman.IEvilHangmanGame.GuessAlreadyMadeException;
 public class Main {
 	public static void main(String[] args) throws IOException {
 		File dictionary = new File(args[0]);
-		boolean invalid = true;
+		//boolean invalid = true;
 		int wordLength;
 		int guesses;
-		char guess = 'x';
+		//char guess = 'x';
 
 		EvilHangmanGame game = new EvilHangmanGame();
 		try{
@@ -24,7 +24,8 @@ public class Main {
 			return;
 		}
 
-		do{
+		game.runGame(guesses, wordLength);
+		/*do{
 			invalid = true;
 			System.out.println("You have " + guesses + " guesses left");
 			System.out.print("Used letters: ");
@@ -62,7 +63,7 @@ public class Main {
 				/*if (Character.isLetter(guess) == false) {
 					System.out.println("Invalid input");
 					invalid = true;
-				}*/
+				}
 				try{
 					if (invalid) {
 						game.makeGuess(guess);
@@ -94,6 +95,6 @@ public class Main {
 		else{
 			System.out.println("You lose!");
 			System.out.println("The word was: " + game.fakeWord);
-		}
+		}*/
 	}
 }

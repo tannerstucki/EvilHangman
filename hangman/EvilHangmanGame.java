@@ -29,13 +29,14 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 	 * with length <code>wordLength</code>.
 	 *	<p>
 	 *	This method should set up everything required to play the game,
-	 *	but should not actually play the game. (ie. There should not be
+	 *	but should not actually play the  (ie. There should not be
 	 *	a loop to prompt for input from the user.)
 	 * 
 	 * @param dictionary Dictionary of words to use for the game
 	 * @param wordLength Number of characters in the word to guess
 	 */
 	public void startGame(File dictionary, int wordLength) {
+		//guessedWord.clear();
 		try{
 			Scanner scan = new Scanner(dictionary);
 			while(scan.hasNext()){
@@ -62,16 +63,16 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 	}
 
 	/**
-	 * Make a guess in the current game.
+	 * Make a guess in the current 
 	 * 
 	 * @param guess The character being guessed
 	 *
 	 * @return The set of strings that satisfy all the guesses made so far
 	 * in the game, including the guess made in this call. The game could claim
-	 * that any of these words had been the secret word for the whole game. 
+	 * that any of these words had been the secret word for the whole  
 	 * 
 	 * @throws GuessAlreadyMadeException If the character <code>guess</code> 
-	 * has already been guessed in this game.
+	 * has already been guessed in this 
 	 */
 	//@Override
 	public Set<String> makeGuess(char guess) throws GuessAlreadyMadeException{
@@ -201,6 +202,7 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 				if (biggestKey.charAt(k) == guess) {
 					biggestCount++;
 					guessedWord.setCharAt(k, guess);
+					System.out.println("you in");
 					passedThrough = true;
 					numberOfCorrect++;
 				}
@@ -211,5 +213,82 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 		//}
 		//numberOfCorrect = biggestCount;
 		return biggestSet;
+	}
+
+	public void runGame(int wordLength, int guesses){
+		boolean invalid = true;
+		char guess = 'x';
+
+		do{
+			invalid = true;
+			System.out.println("You have " + guesses + " guesses left");
+			System.out.print("Used letters: ");
+			if (guessedLetters.size() == 0) {
+				System.out.print("\n");
+			}
+			else{
+				Collections.sort(guessedLetters);
+				for (int j = 0; j < guessedLetters.size(); j++) {
+						if (j < guessedLetters.size() - 1){
+							System.out.print(guessedLetters.get(j) + " ");
+						}
+						else{
+							System.out.println(guessedLetters.get(j));	
+						}
+				}
+			}
+			if (guessedWord.toString().equals("")) {
+				System.out.print("Word: ");
+				String dash = "-";
+				for (int i = 0; i < wordLength; i++ ) {
+					guessedWord.append(dash);
+					System.out.print("-");
+				}
+				System.out.print("\n");
+			}
+			else {
+				System.out.println("Word: " + guessedWord.toString());
+			}
+			while(invalid){
+				System.out.print("Enter guess: ");
+				Scanner in = new Scanner(System.in);
+				guess = in.next().charAt(0);
+				guess = Character.toLowerCase(guess);
+				/*if (Character.isLetter(guess) == false) {
+					System.out.println("Invalid input");
+					invalid = true;
+				}*/
+				try{
+					if (invalid) {
+						makeGuess(guess);
+					}
+					invalid = false;
+				} catch(GuessAlreadyMadeException e){
+					invalid = true;
+				}
+				//in.close();
+			}
+			if (passedThrough == false) {
+				guesses--;
+			}
+			if (numberOfCorrect == 0) {
+				System.out.println("Sorry, there are no " + guess + "'s" + "\n");
+			}
+			else if (numberOfCorrect == 1 ){
+				System.out.println("Yes, there is 1 " + guess + "\n");
+			}
+			else{
+				System.out.println("Yes, there are " + numberOfCorrect + " " + guess + "'s" + "\n");
+			}
+		} while(guesses > 0 && completedWord == false);
+
+		if (completedWord == true) {
+			System.out.println("Congrats, you won.");
+			System.out.println("The word was: " + guessedWord.toString());
+		}
+		else{
+			System.out.println("You lose!");
+			System.out.println("The word was: " + fakeWord);
+		}
 	}
 }
