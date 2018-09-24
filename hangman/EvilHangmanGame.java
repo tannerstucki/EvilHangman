@@ -36,7 +36,15 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 	 * @param wordLength Number of characters in the word to guess
 	 */
 	public void startGame(File dictionary, int wordLength) {
-		//guessedWord.clear();
+		guessedLetters.clear();
+		wordMap.clear();
+		guessedWord.setLength(0);
+		numberOfCorrect = 0;
+		completedWord = false;
+		fakeWord = "";
+		passedThrough = false;
+		curWords.clear();
+
 		try{
 			Scanner scan = new Scanner(dictionary);
 			while(scan.hasNext()){
@@ -224,7 +232,7 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 		boolean firstpass = true;
 		guessedLetters.clear();
 		wordMap.clear();
-		guessedWord.setLength(0);
+		//guessedWord.setLength(0);
 		numberOfCorrect = 0;
 		completedWord = false;
 		fakeWord = "";

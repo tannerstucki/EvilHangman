@@ -6,7 +6,7 @@ import java.lang.*;
 import hangman.IEvilHangmanGame.GuessAlreadyMadeException;
 
 public class Main {
-	/*private static void testGame(){
+	private static void testGame(){
 		EvilHangmanGame otherGame = new EvilHangmanGame();
 		File dictionary = new File("dictionary.txt");
 		System.out.println("you in");
@@ -21,7 +21,7 @@ public class Main {
 		otherGame.runGame(10,5);
 		otherGame.startGame(dictionary, 6);
 		otherGame.runGame(12,6);
-	}*/
+	}
 
 	public static void main(String[] args) throws IOException {
 		//testGame();
