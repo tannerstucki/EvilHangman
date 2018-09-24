@@ -201,8 +201,11 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 			for (int k = 0; k < biggestKey.length(); k++) {
 				if (biggestKey.charAt(k) == guess) {
 					biggestCount++;
+					//System.out.println(guessedWord.length());
+					//System.out.println(guessedWord + "\n" + "\n" + "\n" + "\n");
 					guessedWord.setCharAt(k, guess);
-					System.out.println("you in");
+					//System.out.println(guessedWord.length());
+					//System.out.println(guessedWord + "\n" + "\n" + "\n" + "\n");
 					passedThrough = true;
 					numberOfCorrect++;
 				}
@@ -215,9 +218,10 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 		return biggestSet;
 	}
 
-	public void runGame(int wordLength, int guesses){
+	public void runGame(int guesses, int wordLength){
 		boolean invalid = true;
 		char guess = 'x';
+		boolean firstpass = true;
 
 		do{
 			invalid = true;
@@ -237,7 +241,8 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 						}
 				}
 			}
-			if (guessedWord.toString().equals("")) {
+			//if (guessedWord.toString().equals("")) {
+			if (firstpass) {
 				System.out.print("Word: ");
 				String dash = "-";
 				for (int i = 0; i < wordLength; i++ ) {
@@ -245,6 +250,7 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 					System.out.print("-");
 				}
 				System.out.print("\n");
+				firstpass = false;
 			}
 			else {
 				System.out.println("Word: " + guessedWord.toString());
