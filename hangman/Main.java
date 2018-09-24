@@ -6,7 +6,25 @@ import java.lang.*;
 import hangman.IEvilHangmanGame.GuessAlreadyMadeException;
 
 public class Main {
+	/*private static void testGame(){
+		EvilHangmanGame otherGame = new EvilHangmanGame();
+		File dictionary = new File("dictionary.txt");
+		System.out.println("you in");
+
+		otherGame.startGame(dictionary, 2);
+		otherGame.runGame(4,2);
+		otherGame.startGame(dictionary, 3);
+		otherGame.runGame(6,3);
+		otherGame.startGame(dictionary, 4);
+		otherGame.runGame(8,4);
+		otherGame.startGame(dictionary, 5);
+		otherGame.runGame(10,5);
+		otherGame.startGame(dictionary, 6);
+		otherGame.runGame(12,6);
+	}*/
+
 	public static void main(String[] args) throws IOException {
+		//testGame();
 		File dictionary = new File(args[0]);
 		//boolean invalid = true;
 		int wordLength;

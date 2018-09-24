@@ -222,6 +222,14 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 		boolean invalid = true;
 		char guess = 'x';
 		boolean firstpass = true;
+		guessedLetters.clear();
+		wordMap.clear();
+		guessedWord.setLength(0);
+		numberOfCorrect = 0;
+		completedWord = false;
+		fakeWord = "";
+		passedThrough = false;
+
 
 		do{
 			invalid = true;
