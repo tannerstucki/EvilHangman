@@ -96,6 +96,7 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 
 		guessedLetters.add(guess);
 		buildMap(guess);
+		//System.out.println(wordMap + "\n");
 		curWords = findBiggest(guess);
 		wordMap.clear();
 
@@ -155,6 +156,8 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 		numberOfCorrect = 0;
 
 		for (Map.Entry<String,Set<String>> entry : wordMap.entrySet()) {
+			curCount = 0;
+			biggestCount = 0;
 			curSet = entry.getValue();
 			curKey = entry.getKey();
 			if (curSet.size() > biggestSet.size()) {
@@ -185,7 +188,7 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 							biggestSet = curSet;
 							biggestKey = curKey;
 							//biggestCount = curCount;
-							break;							
+							break;					
 						}
 					}
 				}
