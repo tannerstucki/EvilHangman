@@ -11,25 +11,60 @@ public class Main {
 		File dictionary = new File("dictionary.txt");
 		System.out.println("you in");
 
+		try{
 		otherGame.startGame(dictionary, 2);
-		otherGame.runGame(4,2);
+		otherGame.makeGuess('v');
+		otherGame.makeGuess('l');
+		otherGame.makeGuess('z');
+		otherGame.makeGuess('f');
 		otherGame.startGame(dictionary, 3);
-		otherGame.runGame(6,3);
+		otherGame.makeGuess('e');
+		otherGame.makeGuess('p');
+		otherGame.makeGuess('v');
+		otherGame.makeGuess('w');
+		otherGame.makeGuess('g');
+		otherGame.makeGuess('x');
 		otherGame.startGame(dictionary, 4);
-		otherGame.runGame(8,4);
+		otherGame.makeGuess('p');
+		otherGame.makeGuess('a');
+		otherGame.makeGuess('h');
+		otherGame.makeGuess('u');
+		otherGame.makeGuess('l');
+		otherGame.makeGuess('g');
+		otherGame.makeGuess('j');
+		otherGame.makeGuess('e');
 		otherGame.startGame(dictionary, 5);
-		otherGame.runGame(10,5);
+		otherGame.makeGuess('k');
+		otherGame.makeGuess('w');
+		otherGame.makeGuess('e');
+		otherGame.makeGuess('u');
+		otherGame.makeGuess('s');
+		otherGame.makeGuess('b');
+		otherGame.makeGuess('t');
+		otherGame.makeGuess('i');
+		otherGame.makeGuess('z');
+		otherGame.makeGuess('n');
 		otherGame.startGame(dictionary, 6);
-		otherGame.runGame(12,6);
+		otherGame.makeGuess('t');
+		otherGame.makeGuess('m');
+		otherGame.makeGuess('r');
+		otherGame.makeGuess('n');
+		otherGame.makeGuess('o');
+		otherGame.makeGuess('j');
+		otherGame.makeGuess('a');
+		otherGame.makeGuess('q');
+		otherGame.makeGuess('e');
+		}
+		catch(GuessAlreadyMadeException e){
+			System.out.println("Invalid command line arguement");
+		}
 	}
 
 	public static void main(String[] args) throws IOException {
 		//testGame();
 		File dictionary = new File(args[0]);
-		//boolean invalid = true;
 		int wordLength;
 		int guesses;
-		//char guess = 'x';
 
 		EvilHangmanGame game = new EvilHangmanGame();
 		try{
@@ -43,76 +78,5 @@ public class Main {
 		}
 
 		game.runGame(guesses, wordLength);
-		/*do{
-			invalid = true;
-			System.out.println("You have " + guesses + " guesses left");
-			System.out.print("Used letters: ");
-			if (game.guessedLetters.size() == 0) {
-				System.out.print("\n");
-			}
-			else{
-				Collections.sort(game.guessedLetters);
-				for (int j = 0; j < game.guessedLetters.size(); j++) {
-						if (j < game.guessedLetters.size() - 1){
-							System.out.print(game.guessedLetters.get(j) + " ");
-						}
-						else{
-							System.out.println(game.guessedLetters.get(j));	
-						}
-				}
-			}
-			if (game.guessedWord.toString().equals("")) {
-				System.out.print("Word: ");
-				String dash = "-";
-				for (int i = 0; i < wordLength; i++ ) {
-					game.guessedWord.append(dash);
-					System.out.print("-");
-				}
-				System.out.print("\n");
-			}
-			else {
-				System.out.println("Word: " + game.guessedWord.toString());
-			}
-			while(invalid){
-				System.out.print("Enter guess: ");
-				Scanner in = new Scanner(System.in);
-				guess = in.next().charAt(0);
-				guess = Character.toLowerCase(guess);
-				/*if (Character.isLetter(guess) == false) {
-					System.out.println("Invalid input");
-					invalid = true;
-				}
-				try{
-					if (invalid) {
-						game.makeGuess(guess);
-					}
-					invalid = false;
-				} catch(GuessAlreadyMadeException e){
-					invalid = true;
-				}
-				//in.close();
-			}
-			if (game.passedThrough == false) {
-				guesses--;
-			}
-			if (game.numberOfCorrect == 0) {
-				System.out.println("Sorry, there are no " + guess + "'s" + "\n");
-			}
-			else if (game.numberOfCorrect == 1 ){
-				System.out.println("Yes, there is 1 " + guess + "\n");
-			}
-			else{
-				System.out.println("Yes, there are " + game.numberOfCorrect + " " + guess + "'s" + "\n");
-			}
-		} while(guesses > 0 && game.completedWord == false);
-
-		if (game.completedWord == true) {
-			System.out.println("Congrats, you won.");
-			System.out.println("The word was: " + game.guessedWord.toString());
-		}
-		else{
-			System.out.println("You lose!");
-			System.out.println("The word was: " + game.fakeWord);
-		}*/
 	}
 }

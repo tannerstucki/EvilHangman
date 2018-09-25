@@ -56,14 +56,14 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 				}
 			}
 			scan.close();
+			for (int i = 0; i < wordLength; i++ ) {
+				guessedWord.append("-");
+			}
 		}
 		catch(Exception e){
 			System.out.println("Invalid file");
 			return;
 		}
-		/*for (String s : curWords) {
-			System.out.println(s);
-		}*/
 	}
 	
 	public boolean isAlpha(String name){
@@ -84,11 +84,6 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 	 */
 	//@Override
 	public Set<String> makeGuess(char guess) throws GuessAlreadyMadeException{
-		//Set <String> biggestSet = new HashSet<>();
-		//guessedLetters.add(guess);
-		//if (guessedLetters.contains(guess) == true) {
-			//throw new GuessAlreadyMadeException();
-		//}
 
 		if (Character.isLetter(guess) == false) {
 			System.out.println("Invalid input");
@@ -99,12 +94,10 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 			throw new GuessAlreadyMadeException();	
 		}
 
-		//System.out.println(curWords);
 		guessedLetters.add(guess);
 		buildMap(guess);
 		curWords = findBiggest(guess);
 		wordMap.clear();
-		//System.out.println(curWords);
 
 		return curWords;
 	}
@@ -123,22 +116,16 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 				else{
 					lettersInWord.append("-");
 				}
-				//System.out.println(lettersInWord);	
 			}
-			/*System.out.println(s);
-			System.out.println(lettersInWord.toString());
-			System.out.println(wordMap);*/
 			if (wordMap.get(lettersInWord.toString()) == null){
 				Set <String> tempSet = new HashSet<String>();
 				tempSet.add(s);
-				//System.out.println(tempSet + "\n");
 				wordMap.put(lettersInWord.toString(),tempSet);
 			}
 			else{
 				Set <String> tempSet = wordMap.get(lettersInWord.toString());
 				tempSet.add(s);
 				wordMap.put(lettersInWord.toString(),tempSet);
-				//System.out.println(tempSet + "\n");
 			}
 			fakeWord = s;
 		}	
@@ -168,7 +155,6 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 		numberOfCorrect = 0;
 
 		for (Map.Entry<String,Set<String>> entry : wordMap.entrySet()) {
-			//System.out.println(curSet);
 			curSet = entry.getValue();
 			curKey = entry.getKey();
 			if (curSet.size() > biggestSet.size()) {
@@ -205,15 +191,10 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 				}
 			}
 		}
-		//if (passedThrough == false) {
 			for (int k = 0; k < biggestKey.length(); k++) {
 				if (biggestKey.charAt(k) == guess) {
 					biggestCount++;
-					//System.out.println(guessedWord.length());
-					//System.out.println(guessedWord + "\n" + "\n" + "\n" + "\n");
 					guessedWord.setCharAt(k, guess);
-					//System.out.println(guessedWord.length());
-					//System.out.println(guessedWord + "\n" + "\n" + "\n" + "\n");
 					passedThrough = true;
 					numberOfCorrect++;
 				}
@@ -221,7 +202,6 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 			if (guessedWord.toString().contains("-") == false) {
 				completedWord = true;
 			}
-		//}
 		//numberOfCorrect = biggestCount;
 		return biggestSet;
 	}
@@ -232,7 +212,6 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 		boolean firstpass = true;
 		guessedLetters.clear();
 		wordMap.clear();
-		//guessedWord.setLength(0);
 		numberOfCorrect = 0;
 		completedWord = false;
 		fakeWord = "";
@@ -258,28 +237,23 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 				}
 			}
 			//if (guessedWord.toString().equals("")) {
-			if (firstpass) {
+			/*if (firstpass) {
 				System.out.print("Word: ");
-				String dash = "-";
 				for (int i = 0; i < wordLength; i++ ) {
-					guessedWord.append(dash);
+					guessedWord.append("-");
 					System.out.print("-");
 				}
 				System.out.print("\n");
 				firstpass = false;
 			}
-			else {
+			else {*/
 				System.out.println("Word: " + guessedWord.toString());
-			}
+			//}
 			while(invalid){
 				System.out.print("Enter guess: ");
 				Scanner in = new Scanner(System.in);
 				guess = in.next().charAt(0);
 				guess = Character.toLowerCase(guess);
-				/*if (Character.isLetter(guess) == false) {
-					System.out.println("Invalid input");
-					invalid = true;
-				}*/
 				try{
 					if (invalid) {
 						makeGuess(guess);
@@ -288,7 +262,6 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 				} catch(GuessAlreadyMadeException e){
 					invalid = true;
 				}
-				//in.close();
 			}
 			if (passedThrough == false) {
 				guesses--;
